@@ -9,8 +9,32 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        primary: '#000000',
-        secondary: '#FFFFFF',
+        primary: {
+          DEFAULT: '#000000',
+          blue: '#142E54',
+        },
+        secondary: {
+          DEFAULT: '#FFFFFF',
+          sand: '#A7967E',
+          sage: '#C2CCC5',
+        },
+        tertiary: {
+          cream: '#EAE6DF',
+        },
+        gray: {
+          50: '#F9FAFB',
+          100: '#F3F4F6',
+          200: '#E5E7EB',
+          300: '#D1D5DB',
+          400: '#9CA3AF',
+          500: '#6B7280',
+          600: '#4B5563',
+          700: '#374151',
+          800: '#1F2937',
+          900: '#111827',
+        },
+        white: '#FFFFFF',
+        black: '#000000',
       },
       fontFamily: {
         sans: ['var(--font-inter)', 'system-ui', 'sans-serif'],
@@ -30,9 +54,19 @@ const config: Config = {
           '100%': { opacity: '1', transform: 'translateY(0)' },
         },
       },
+      backgroundColor: theme => ({
+        ...theme('colors'),
+      }),
+      textColor: theme => ({
+        ...theme('colors'),
+      }),
+      borderColor: theme => ({
+        ...theme('colors'),
+      }),
     },
   },
   plugins: [],
+  darkMode: 'class',
 };
 
 export default config; 

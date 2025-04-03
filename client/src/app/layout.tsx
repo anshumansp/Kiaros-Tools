@@ -1,14 +1,15 @@
 import { Inter } from 'next/font/google';
 import { Header, Footer } from '@/components/layout';
 // import CustomCursor from '@/components/ui/CustomCursor';
+import Chatbot from '@/components/ui/Chatbot';
 import ReduxProvider from '@/components/providers/ReduxProvider';
 import '@/styles/globals.css';
 
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata = {
-  title: 'ToolsZone - Premium Tools Directory',
-  description: 'A collection of premium tools and libraries for developers',
+  title: 'Kiaros - Premium Tools Hub',
+  description: 'A suite of professional tools for everyday productivity',
 };
 
 export default function RootLayout({
@@ -17,14 +18,15 @@ export default function RootLayout({
   children: React.ReactNode;
   }) {
   return (
-    <html lang="en" className="h-full">
-      <body className={`${inter.className} h-full bg-white text-black`}>
+    <html lang="en" style={{ height: '100%' }}>
+      <body className={inter.className} style={{ height: '100%', backgroundColor: '#FFFFFF', color: '#000000' }}>
         <ReduxProvider>
-          <div className="flex min-h-full flex-col">
+          <div style={{ display: 'flex', minHeight: '100%', flexDirection: 'column' }}>
             <Header />
-            <main className="flex-1">{children}</main>
+            <main style={{ flex: 1 }}>{children}</main>
             <Footer />
           </div>
+          <Chatbot />
           {/* <CustomCursor /> */}
         </ReduxProvider>
       </body>

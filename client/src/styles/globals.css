@@ -3,10 +3,43 @@
 @tailwind utilities;
 
 :root {
+  --primary-blue: #142E54;
+  --secondary-sand: #A7967E;
+  --secondary-sage: #C2CCC5;
+  --tertiary-cream: #EAE6DF;
   --cursor-color: #000000;
 }
 
-/* Temporarily comment out cursor styling
+.dark {
+  --primary-blue: #1e3a61;
+  --secondary-sand: #b8a88f;
+  --secondary-sage: #d3dbd6;
+  --tertiary-cream: #f5f3ee;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #FFFFFF;
+  color: #000000;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body.dark {
+  background-color: #1a1a1a;
+  color: #FFFFFF;
+}
+
+h1, h2, h3, h4, h5 {
+  font-weight: bold;
+  letter-spacing: -0.025em;
+}
+
+/* Custom cursor styling - temporarily commented out until icons are ready */
+/* 
 * {
   cursor: none !important;
 }
@@ -18,13 +51,26 @@ body {
 .custom-cursor {
   width: 24px;
   height: 24px;
-  background-image: url('/assets/icons/custom-cursor.svg');
-  background-size: contain;
-  background-repeat: no-repeat;
+  background-color: var(--cursor-color);
+  border-radius: 50%;
   position: fixed;
   pointer-events: none;
   z-index: 9999;
   mix-blend-mode: difference;
   transition: transform 0.2s ease;
 }
-*/ 
+*/
+
+/* Smooth animations */
+.smooth-transition {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Special gradients */
+.bg-gradient-primary {
+  background: linear-gradient(to bottom right, #FFFFFF, #EAE6DF);
+}
+
+.bg-gradient-secondary {
+  background: linear-gradient(to bottom right, #142E54, #000000);
+} 

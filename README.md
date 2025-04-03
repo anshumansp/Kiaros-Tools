@@ -1,10 +1,17 @@
-# ToolsZone
+# Kiaros
 
-A web application providing various utility tools like PDF merging, resume making, etc.
+A comprehensive suite of productivity tools designed for professionals to streamline their workflow and boost efficiency.
+
+## Tool Suite
+
+- **PDF Tools**: Merge, split, compress, and convert PDF files
+- **Image Converter**: Convert images between different formats (JPEG, PNG, WebP, GIF)
+- **Resume Builder**: Create professional resumes with customizable templates
+- **More tools coming soon!**
 
 ## Tech Stack
 
-- Frontend: Next.js, TypeScript, Tailwind CSS
+- Frontend: Next.js, TypeScript, Tailwind CSS, Framer Motion
 - Backend: Node.js, Express, TypeScript
 - Database: PostgreSQL
 - Infrastructure: Docker, Nginx
@@ -19,8 +26,8 @@ A web application providing various utility tools like PDF merging, resume makin
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/toolzone.git
-   cd toolzone
+   git clone https://github.com/yourusername/kiaros.git
+   cd kiaros
    ```
 
 2. Generate SSL certificates for local development:
@@ -71,7 +78,7 @@ NODE_ENV=development
 PORT=5000
 POSTGRES_USER=postgres
 POSTGRES_PASSWORD=postgres
-POSTGRES_DB=toolzone
+POSTGRES_DB=kiaros
 POSTGRES_HOST=postgres
 JWT_SECRET=your_jwt_secret
 STRIPE_SECRET_KEY=your_stripe_secret_key
@@ -79,8 +86,11 @@ STRIPE_SECRET_KEY=your_stripe_secret_key
 
 ## Features
 
-- PDF Merger: Combine multiple PDF files into one
-- Resume Maker (Coming Soon)
+- Modern, responsive UI with smooth animations
+- Dark mode support
+- Premium subscription model for advanced features
+- Interactive chatbot assistant
+- Mobile-optimized experience
 
 ## Contributing
 
