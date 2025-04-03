@@ -1,0 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --cursor-color: #000000;
+}
+
+/* Temporarily comment out cursor styling
+* {
+  cursor: none !important;
+}
+
+body {
+  cursor: none !important;
+}
+
+.custom-cursor {
+  width: 24px;
+  height: 24px;
+  background-image: url('/assets/icons/custom-cursor.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  mix-blend-mode: difference;
+  transition: transform 0.2s ease;
+}
+*/ 
