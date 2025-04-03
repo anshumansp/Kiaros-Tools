@@ -14,39 +14,84 @@ const navigation = [
 export default function Header() {
     const [scrolled, setScrolled] = useState(false);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+    const [isMobile, setIsMobile] = useState(false);
 
     useEffect(() => {
         const handleScroll = () => {
             setScrolled(window.scrollY > 10);
         };
+
+        const handleResize = () => {
+            setIsMobile(window.innerWidth < 768);
+        };
+
+        handleResize();
         window.addEventListener('scroll', handleScroll);
-        return () => window.removeEventListener('scroll', handleScroll);
+        window.addEventListener('resize', handleResize);
+
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+            window.removeEventListener('resize', handleResize);
+        };
     }, []);
 
     return (
         <motion.header
-            className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${scrolled ? 'bg-white/90 backdrop-blur-md shadow-sm' : 'bg-transparent'
-                }`}
+            style={{
+                position: 'fixed',
+                top: 0,
+                left: 0,
+                width: '100%',
+                zIndex: 1000,
+                transition: 'all 300ms',
+                backgroundColor: scrolled ? 'rgba(255, 255, 255, 0.9)' : 'transparent',
+                backdropFilter: scrolled ? 'blur(8px)' : 'none',
+                boxShadow: scrolled ? '0 1px 3px 0 rgba(0, 0, 0, 0.1)' : 'none',
+            }}
             initial={{ y: -100 }}
             animate={{ y: 0 }}
             transition={{ duration: 0.5 }}
         >
-            <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                <div className="flex h-16 items-center justify-between">
+            <div style={{
+                maxWidth: '80rem',
+                marginLeft: 'auto',
+                marginRight: 'auto',
+                paddingLeft: '1rem',
+                paddingRight: '1rem'
+            }}>
+                <div style={{
+                    display: 'flex',
+                    height: '4rem',
+                    alignItems: 'center',
+                    justifyContent: 'space-between'
+                }}>
                     {/* Logo */}
-                    <div className="flex-shrink-0">
-                        <Link href="/" className="flex items-center">
-                            <span className="text-2xl font-bold text-black">Kia<span className="text-[#142E54]">ros</span></span>
+                    <div style={{ flexShrink: 0 }}>
+                        <Link href="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
+                            <span style={{ fontSize: '1.5rem', fontWeight: 'bold', color: '#000000' }}>
+                                Kia<span style={{ color: '#142E54' }}>ros</span>
+                            </span>
                         </Link>
                     </div>
 
                     {/* Desktop navigation */}
-                    <nav className="hidden md:flex md:space-x-8">
+                    <nav style={{
+                        display: isMobile ? 'none' : 'flex',
+                        gap: '2rem'
+                    }}>
                         {navigation.map((item) => (
                             <Link
                                 key={item.name}
                                 href={item.href}
-                                className="text-sm font-medium text-gray-700 hover:text-[#142E54] transition-colors"
+                                style={{
+                                    fontSize: '0.875rem',
+                                    fontWeight: '500',
+                                    color: '#4b5563',
+                                    textDecoration: 'none',
+                                    transition: 'color 150ms',
+                                }}
+                                onMouseOver={(e) => e.currentTarget.style.color = '#142E54'}
+                                onMouseOut={(e) => e.currentTarget.style.color = '#4b5563'}
                             >
                                 {item.name}
                             </Link>
@@ -54,24 +99,54 @@ export default function Header() {
                     </nav>
 
                     {/* Try Tools button */}
-                    <div className="hidden md:flex md:items-center">
+                    <div style={{ display: isMobile ? 'none' : 'flex', alignItems: 'center' }}>
                         <Link
                             href="/tools"
-                            className="ml-8 inline-flex items-center justify-center rounded-md bg-[#142E54] px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-[#0e2240] transition-colors"
+                            style={{
+                                marginLeft: '2rem',
+                                display: 'inline-flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                borderRadius: '0.375rem',
+                                backgroundColor: '#142E54',
+                                paddingLeft: '1rem',
+                                paddingRight: '1rem',
+                                paddingTop: '0.5rem',
+                                paddingBottom: '0.5rem',
+                                fontSize: '0.875rem',
+                                fontWeight: '500',
+                                color: 'white',
+                                boxShadow: '0 1px 2px 0 rgba(0, 0, 0, 0.05)',
+                                transition: 'background-color 150ms',
+                                textDecoration: 'none',
+                            }}
+                            onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#0e2240'}
+                            onMouseOut={(e) => e.currentTarget.style.backgroundColor = '#142E54'}
                         >
                             Try Tools
                         </Link>
                     </div>
 
                     {/* Mobile menu button */}
-                    <div className="flex md:hidden">
+                    <div style={{ display: isMobile ? 'flex' : 'none' }}>
                         <button
                             type="button"
-                            className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"
+                            style={{
+                                margin: '-0.625rem',
+                                display: 'inline-flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                borderRadius: '0.375rem',
+                                padding: '0.625rem',
+                                color: '#4b5563',
+                                background: 'transparent',
+                                border: 'none',
+                                cursor: 'pointer',
+                            }}
                             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                         >
-                            <span className="sr-only">Open main menu</span>
-                            <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" aria-hidden="true">
+                            <span style={{ position: 'absolute', width: '1px', height: '1px', padding: '0', margin: '-1px', overflow: 'hidden', clip: 'rect(0, 0, 0, 0)', whiteSpace: 'nowrap', borderWidth: '0' }}>Open main menu</span>
+                            <svg style={{ height: '1.5rem', width: '1.5rem' }} fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" aria-hidden="true">
                                 {mobileMenuOpen ? (
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
                                 ) : (
@@ -85,13 +160,25 @@ export default function Header() {
 
             {/* Mobile menu */}
             {mobileMenuOpen && (
-                <div className="md:hidden">
-                    <div className="space-y-1 px-4 pb-3 pt-2 bg-white">
+                <div style={{ display: isMobile ? 'block' : 'none' }}>
+                    <div style={{
+                        backgroundColor: 'white',
+                        padding: '0.5rem 1rem 0.75rem',
+                    }}>
                         {navigation.map((item) => (
                             <Link
                                 key={item.name}
                                 href={item.href}
-                                className="block rounded-md py-2 text-base font-medium text-gray-700 hover:bg-gray-50 hover:text-[#142E54]"
+                                style={{
+                                    display: 'block',
+                                    borderRadius: '0.375rem',
+                                    padding: '0.5rem 0',
+                                    fontSize: '1rem',
+                                    fontWeight: '500',
+                                    color: '#4b5563',
+                                    textDecoration: 'none',
+                                    marginBottom: '0.25rem',
+                                }}
                                 onClick={() => setMobileMenuOpen(false)}
                             >
                                 {item.name}
@@ -99,7 +186,20 @@ export default function Header() {
                         ))}
                         <Link
                             href="/tools"
-                            className="block w-full rounded-md bg-[#142E54] px-4 py-2 text-center text-sm font-medium text-white shadow-sm hover:bg-[#0e2240] mt-4"
+                            style={{
+                                display: 'block',
+                                width: '100%',
+                                borderRadius: '0.375rem',
+                                backgroundColor: '#142E54',
+                                padding: '0.5rem 1rem',
+                                textAlign: 'center',
+                                fontSize: '0.875rem',
+                                fontWeight: '500',
+                                color: 'white',
+                                boxShadow: '0 1px 2px 0 rgba(0, 0, 0, 0.05)',
+                                marginTop: '1rem',
+                                textDecoration: 'none',
+                            }}
                             onClick={() => setMobileMenuOpen(false)}
                         >
                             Try Tools

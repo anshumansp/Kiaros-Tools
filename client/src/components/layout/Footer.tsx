@@ -47,49 +47,130 @@ export default function Footer() {
     };
 
     return (
-        <footer className="bg-white border-t border-gray-100">
-            <div className="mx-auto max-w-7xl overflow-hidden px-6 py-16 sm:py-14 lg:px-8">
-                <nav className="flex flex-wrap justify-center gap-x-8 gap-y-4" aria-label="Footer">
+        <footer style={{
+            backgroundColor: 'white',
+            borderTop: '1px solid #f3f4f6'
+        }}>
+            <div style={{
+                maxWidth: '80rem',
+                marginLeft: 'auto',
+                marginRight: 'auto',
+                overflow: 'hidden',
+                padding: '4rem 1.5rem',
+            }}>
+                <nav style={{
+                    display: 'flex',
+                    flexWrap: 'wrap',
+                    justifyContent: 'center',
+                }} aria-label="Footer">
                     {navigation.main.map((item) => (
                         <Link
                             key={item.name}
                             href={item.href}
-                            className="text-sm leading-6 text-gray-600 hover:text-[#142E54]"
+                            style={{
+                                fontSize: '0.875rem',
+                                lineHeight: 1.5,
+                                color: '#4B5563',
+                                marginLeft: '1rem',
+                                marginRight: '1rem',
+                                marginBottom: '1rem',
+                                textDecoration: 'none',
+                                transition: 'color 150ms',
+                            }}
+                            onMouseOver={(e) => e.currentTarget.style.color = '#142E54'}
+                            onMouseOut={(e) => e.currentTarget.style.color = '#4B5563'}
                         >
                             {item.name}
                         </Link>
                     ))}
                 </nav>
 
-                <div className="mt-8 flex justify-center space-x-10">
+                <div style={{
+                    marginTop: '2rem',
+                    display: 'flex',
+                    justifyContent: 'center',
+                    gap: '2.5rem'
+                }}>
                     {navigation.social.map((item) => (
-                        <Link key={item.name} href={item.href} className="text-gray-400 hover:text-gray-500">
-                            <span className="sr-only">{item.name}</span>
-                            <item.icon className="h-6 w-6" aria-hidden="true" />
+                        <Link
+                            key={item.name}
+                            href={item.href}
+                            style={{
+                                color: '#9CA3AF',
+                                transition: 'color 150ms',
+                            }}
+                            onMouseOver={(e) => e.currentTarget.style.color = '#6B7280'}
+                            onMouseOut={(e) => e.currentTarget.style.color = '#9CA3AF'}
+                        >
+                            <span style={{
+                                position: 'absolute',
+                                width: '1px',
+                                height: '1px',
+                                padding: '0',
+                                margin: '-1px',
+                                overflow: 'hidden',
+                                clip: 'rect(0, 0, 0, 0)',
+                                whiteSpace: 'nowrap',
+                                borderWidth: '0'
+                            }}>
+                                {item.name}
+                            </span>
+                            <item.icon style={{ height: '1.5rem', width: '1.5rem' }} aria-hidden="true" />
                         </Link>
                     ))}
                 </div>
 
-                <div className="mt-8 flex items-center justify-center">
+                <div style={{
+                    marginTop: '2rem',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center'
+                }}>
                     <button
                         type="button"
                         onClick={toggleTheme}
-                        className="rounded-full p-1.5 text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 transition-colors"
+                        style={{
+                            borderRadius: '9999px',
+                            padding: '0.375rem',
+                            color: '#6B7280',
+                            backgroundColor: 'transparent',
+                            border: 'none',
+                            cursor: 'pointer',
+                            transition: 'background-color 150ms',
+                        }}
+                        onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#F3F4F6'}
+                        onMouseOut={(e) => e.currentTarget.style.backgroundColor = 'transparent'}
                     >
-                        <span className="sr-only">Toggle dark mode</span>
+                        <span style={{
+                            position: 'absolute',
+                            width: '1px',
+                            height: '1px',
+                            padding: '0',
+                            margin: '-1px',
+                            overflow: 'hidden',
+                            clip: 'rect(0, 0, 0, 0)',
+                            whiteSpace: 'nowrap',
+                            borderWidth: '0'
+                        }}>Toggle dark mode</span>
                         {darkMode ? (
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" style={{ width: '1.25rem', height: '1.25rem' }}>
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591-1.591M12 18.75V21m-4.773-4.227-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z" />
                             </svg>
                         ) : (
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" style={{ width: '1.25rem', height: '1.25rem' }}>
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M21.752 15.002A9.72 9.72 0 0 1 18 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 0 0 3 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 0 0 9.002-5.998Z" />
                             </svg>
                         )}
                     </button>
                 </div>
 
-                <p className="mt-8 text-center text-xs leading-5 text-gray-500">
+                <p style={{
+                    marginTop: '2rem',
+                    textAlign: 'center',
+                    fontSize: '0.75rem',
+                    lineHeight: 1.25,
+                    color: '#6B7280'
+                }}>
                     &copy; {new Date().getFullYear()} Kiaros. All rights reserved.
                 </p>
             </div>

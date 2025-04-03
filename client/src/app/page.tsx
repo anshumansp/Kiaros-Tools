@@ -40,7 +40,7 @@ const features = [
     name: 'PDF Tools',
     description: 'Merge, split, compress, and convert PDF files with ease.',
     icon: (
-      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" style={{ width: '1.5rem', height: '1.5rem' }}>
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="#142E54" style={{ width: '1.5rem', height: '1.5rem' }}>
         <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
       </svg>
     )
@@ -49,7 +49,7 @@ const features = [
     name: 'Resume Builder',
     description: 'Create professional resumes with our intuitive builder.',
     icon: (
-      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" style={{ width: '1.5rem', height: '1.5rem' }}>
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="#142E54" style={{ width: '1.5rem', height: '1.5rem' }}>
         <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
       </svg>
     )
@@ -58,7 +58,7 @@ const features = [
     name: 'Image Converter',
     description: 'Convert images between different formats with one click.',
     icon: (
-      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" style={{ width: '1.5rem', height: '1.5rem' }}>
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="#142E54" style={{ width: '1.5rem', height: '1.5rem' }}>
         <path strokeLinecap="round" strokeLinejoin="round" d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 0 0 1.5-1.5V6a1.5 1.5 0 0 0-1.5-1.5H3.75A1.5 1.5 0 0 0 2.25 6v12a1.5 1.5 0 0 0 1.5 1.5Zm10.5-11.25h.008v.008h-.008V8.25Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
       </svg>
     )
@@ -81,7 +81,7 @@ export default function Home() {
   }, []);
 
   return (
-    <div style={{ position: 'relative', isolation: 'isolate', backgroundColor: '#FFFFFF' }}>
+    <div style={{ position: 'relative', isolation: 'isolate', backgroundColor: '#FFFFFF', marginTop: '4rem' }}>
       {/* Gradient background */}
       <div style={{
         position: 'absolute',
@@ -102,7 +102,7 @@ export default function Home() {
             width: isMobile || isTablet ? '36.125rem' : '72.1875rem',
             maxWidth: 'none',
             transform: 'translateX(-50%) rotate(30deg)',
-            background: 'linear-gradient(to top right, #EAE6DF, #C2CCC5)',
+            background: 'linear-gradient(to top right, #EAE6DF, #142E54)',
             opacity: 0.3,
             clipPath: 'polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)',
           }}
@@ -129,7 +129,8 @@ export default function Home() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            Premium Tools <span style={{ color: '#142E54' }}>for Modern</span> Professionals
+            <span style={{ color: '#142E54' }}>Premium</span> Tools for <br />
+            Modern <span style={{ color: '#142E54' }}>Professionals</span>
           </motion.h1>
           <motion.p
             style={{ marginTop: '1.5rem', fontSize: '1.125rem', lineHeight: 1.8, color: '#4B5563' }}
@@ -159,16 +160,28 @@ export default function Home() {
                 fontWeight: 600,
                 color: 'white',
                 boxShadow: '0 1px 2px 0 rgba(0, 0, 0, 0.05)',
-                transition: 'background-color 300ms'
+                transition: 'background-color 300ms',
+                textDecoration: 'none',
               }}
+              onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#0e2240'}
+              onMouseOut={(e) => e.currentTarget.style.backgroundColor = '#142E54'}
             >
               Explore Tools
             </Link>
             <Link
               href="/contact"
-              style={{ fontSize: '0.875rem', fontWeight: 600, lineHeight: 1.5, color: '#1F2937', transition: 'color 300ms' }}
+              style={{
+                fontSize: '0.875rem',
+                fontWeight: 600,
+                lineHeight: 1.5,
+                color: '#142E54',
+                transition: 'color 300ms',
+                textDecoration: 'none',
+              }}
+              onMouseOver={(e) => e.currentTarget.style.color = '#0e2240'}
+              onMouseOut={(e) => e.currentTarget.style.color = '#142E54'}
             >
-              Contact Us <span aria-hidden="true">→</span>
+              Contact Us <span aria-hidden="true" style={{ marginLeft: '0.25rem' }}>→</span>
             </Link>
           </motion.div>
         </div>
@@ -184,7 +197,8 @@ export default function Home() {
         paddingLeft: isMobile || isTablet ? '1.5rem' : '2rem',
         paddingRight: isMobile || isTablet ? '1.5rem' : '2rem',
         background: 'linear-gradient(to bottom, #ffffff, rgba(234, 230, 223, 0.3))',
-        borderRadius: '1.5rem'
+        borderRadius: '1.5rem',
+        boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)'
       }}>
         <div style={{ marginLeft: 'auto', marginRight: 'auto', maxWidth: '42rem', textAlign: 'center', marginBottom: '4rem' }}>
           <h2 style={{
@@ -194,7 +208,7 @@ export default function Home() {
             lineHeight: 1.2,
             color: '#1F2937'
           }}>
-            Powerful Tools for <span style={{ color: '#142E54' }}>Every Task</span>
+            <span style={{ color: '#142E54' }}>Powerful</span> Tools for <span style={{ color: '#142E54' }}>Every</span> Task
           </h2>
           <p style={{ marginTop: '1.5rem', fontSize: '1.125rem', lineHeight: 1.8, color: '#4B5563' }}>
             Our tools are designed to streamline your workflow and save you time.
@@ -225,9 +239,9 @@ export default function Home() {
                 backgroundColor: '#FFFFFF',
                 padding: '2rem',
                 borderRadius: '1rem',
-                boxShadow: '0 1px 2px 0 rgba(0, 0, 0, 0.05)',
+                boxShadow: '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)',
                 border: '1px solid #F3F4F6',
-                transition: 'all 300ms'
+                transition: 'all 300ms',
               }}
             >
               <div style={{
@@ -242,7 +256,7 @@ export default function Home() {
               }}>
                 {feature.icon}
               </div>
-              <h3 style={{ fontSize: '1.25rem', fontWeight: 600, lineHeight: 1.75, color: '#1F2937' }}>{feature.name}</h3>
+              <h3 style={{ fontSize: '1.25rem', fontWeight: 600, lineHeight: 1.75, color: '#142E54' }}>{feature.name}</h3>
               <p style={{ marginTop: '0.5rem', flex: 1, fontSize: '1rem', lineHeight: 1.75, color: '#4B5563' }}>{feature.description}</p>
               <Link
                 href={`/tools#${feature.name.toLowerCase().replace(/\s+/g, '-')}`}
@@ -251,10 +265,27 @@ export default function Home() {
                   fontSize: '0.875rem',
                   fontWeight: 500,
                   color: '#142E54',
-                  transition: 'color 300ms'
+                  transition: 'color 300ms',
+                  display: 'flex',
+                  alignItems: 'center',
+                  textDecoration: 'none',
+                }}
+                onMouseOver={(e) => {
+                  e.currentTarget.style.color = '#0e2240';
+                  const arrow = e.currentTarget.querySelector('span');
+                  if (arrow) {
+                    arrow.style.transform = 'translateX(4px)';
+                  }
+                }}
+                onMouseOut={(e) => {
+                  e.currentTarget.style.color = '#142E54';
+                  const arrow = e.currentTarget.querySelector('span');
+                  if (arrow) {
+                    arrow.style.transform = 'translateX(0)';
+                  }
                 }}
               >
-                Try Now <span style={{ display: 'inline-block', transition: 'transform 300ms' }}>→</span>
+                Try Now <span style={{ display: 'inline-block', marginLeft: '0.25rem', transition: 'transform 300ms' }}>→</span>
               </Link>
             </motion.div>
           ))}
@@ -289,7 +320,30 @@ export default function Home() {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <div style={{ marginLeft: 'auto', marginRight: 'auto', maxWidth: '42rem', textAlign: 'center' }}>
+          {/* Decorative elements */}
+          <div style={{
+            position: 'absolute',
+            top: '-1rem',
+            right: '-1rem',
+            width: '8rem',
+            height: '8rem',
+            borderRadius: '9999px',
+            background: 'radial-gradient(#A7967E, transparent)',
+            opacity: 0.3,
+          }} aria-hidden="true" />
+
+          <div style={{
+            position: 'absolute',
+            bottom: '-2rem',
+            left: '-2rem',
+            width: '12rem',
+            height: '12rem',
+            borderRadius: '9999px',
+            background: 'radial-gradient(#C2CCC5, transparent)',
+            opacity: 0.2,
+          }} aria-hidden="true" />
+
+          <div style={{ marginLeft: 'auto', marginRight: 'auto', maxWidth: '42rem', textAlign: 'center', position: 'relative', zIndex: 1 }}>
             <h2 style={{
               fontSize: isMobile || isTablet ? '1.875rem' : '2.25rem',
               fontWeight: 'bold',
@@ -324,7 +378,16 @@ export default function Home() {
                   fontWeight: 600,
                   color: '#142E54',
                   boxShadow: '0 1px 2px 0 rgba(0, 0, 0, 0.05)',
-                  transition: 'background-color 300ms'
+                  transition: 'all 300ms',
+                  textDecoration: 'none',
+                }}
+                onMouseOver={(e) => {
+                  e.currentTarget.style.backgroundColor = '#EAE6DF';
+                  e.currentTarget.style.transform = 'translateY(-2px)';
+                }}
+                onMouseOut={(e) => {
+                  e.currentTarget.style.backgroundColor = 'white';
+                  e.currentTarget.style.transform = 'translateY(0)';
                 }}
               >
                 Get Premium Access
@@ -336,10 +399,27 @@ export default function Home() {
                   fontWeight: 600,
                   lineHeight: 1.5,
                   color: 'white',
-                  transition: 'color 300ms'
+                  transition: 'color 300ms',
+                  display: 'flex',
+                  alignItems: 'center',
+                  textDecoration: 'none',
+                }}
+                onMouseOver={(e) => {
+                  e.currentTarget.style.color = '#C2CCC5';
+                  const arrow = e.currentTarget.querySelector('span');
+                  if (arrow) {
+                    arrow.style.transform = 'translateX(4px)';
+                  }
+                }}
+                onMouseOut={(e) => {
+                  e.currentTarget.style.color = 'white';
+                  const arrow = e.currentTarget.querySelector('span');
+                  if (arrow) {
+                    arrow.style.transform = 'translateX(0)';
+                  }
                 }}
               >
-                Explore Free Tools <span aria-hidden="true">→</span>
+                Explore Free Tools <span aria-hidden="true" style={{ display: 'inline-block', marginLeft: '0.25rem', transition: 'transform 300ms' }}>→</span>
               </Link>
             </div>
           </div>
