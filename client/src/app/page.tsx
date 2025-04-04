@@ -4,6 +4,9 @@ import { motion } from 'framer-motion';
 import Link from 'next/link';
 // import Image from 'next/image';
 import { useEffect, useState } from 'react';
+import { useTheme } from '@/components/providers/ThemeProvider';
+import styles from '@/styles/Page.module.css';
+import Button from '@/components/ui/Button';
 
 // Temporarily comment out testimonials to avoid image loading errors
 /*
@@ -68,6 +71,7 @@ const features = [
 export default function Home() {
   const [isMobile, setIsMobile] = useState(false);
   const [isTablet, setIsTablet] = useState(false);
+  const { darkMode } = useTheme();
 
   useEffect(() => {
     const handleResize = () => {
@@ -81,7 +85,12 @@ export default function Home() {
   }, []);
 
   return (
-    <div style={{ position: 'relative', isolation: 'isolate', backgroundColor: '#FFFFFF', marginTop: '4rem' }}>
+    <div style={{
+      position: 'relative',
+      isolation: 'isolate',
+      backgroundColor: darkMode ? '#121212' : '#FFFFFF',
+      paddingTop: '8rem'
+    }}>
       {/* Gradient background */}
       <div style={{
         position: 'absolute',
@@ -102,8 +111,10 @@ export default function Home() {
             width: isMobile || isTablet ? '36.125rem' : '72.1875rem',
             maxWidth: 'none',
             transform: 'translateX(-50%) rotate(30deg)',
-            background: 'linear-gradient(to top right, #EAE6DF, #142E54)',
-            opacity: 0.3,
+            background: darkMode ?
+              'linear-gradient(to top right, rgba(20, 46, 84, 0.3), rgba(24, 24, 27, 0.1))' :
+              'linear-gradient(to top right, #EAE6DF, #142E54)',
+            opacity: darkMode ? 0.6 : 0.3,
             clipPath: 'polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)',
           }}
         />
@@ -111,19 +122,20 @@ export default function Home() {
 
       {/* Hero Section */}
       <div style={{
-        paddingTop: isMobile ? '8rem' : (isTablet ? '10rem' : '12rem'),
-        paddingBottom: isMobile ? '4rem' : (isTablet ? '6rem' : '8rem'),
+        paddingTop: isMobile ? '10rem' : (isTablet ? '8rem' : '4rem'),
+        paddingBottom: isMobile ? '6rem' : (isTablet ? '8rem' : '10rem'),
         paddingLeft: isMobile || isTablet ? '1.5rem' : '2rem',
         paddingRight: isMobile || isTablet ? '1.5rem' : '2rem'
       }}>
-        <div style={{ marginLeft: 'auto', marginRight: 'auto', maxWidth: '42rem', textAlign: 'center' }}>
+        <div style={{ marginLeft: 'auto', marginRight: 'auto', maxWidth: '50rem', textAlign: 'center' }}>
           <motion.h1
             style={{
-              fontSize: isMobile || isTablet ? '2.25rem' : '3.75rem',
+              fontSize: isMobile ? '2.5rem' : (isTablet ? '3.5rem' : '4.5rem'),
               fontWeight: 'bold',
               letterSpacing: '-0.025em',
               lineHeight: 1.2,
-              color: '#1F2937'
+              color: darkMode ? '#F9FAFB' : '#1F2937',
+              marginBottom: '1.5rem'
             }}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -133,7 +145,14 @@ export default function Home() {
             Modern <span style={{ color: '#142E54' }}>Professionals</span>
           </motion.h1>
           <motion.p
-            style={{ marginTop: '1.5rem', fontSize: '1.125rem', lineHeight: 1.8, color: '#4B5563' }}
+            style={{
+              marginTop: '1.5rem',
+              fontSize: isMobile ? '1.125rem' : '1.25rem',
+              lineHeight: 1.8,
+              color: darkMode ? '#D1D5DB' : '#4B5563',
+              maxWidth: '42rem',
+              margin: '0 auto'
+            }}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
@@ -142,49 +161,63 @@ export default function Home() {
             Simple, efficient, and designed for you.
           </motion.p>
           <motion.div
-            style={{ marginTop: '2.5rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '1.5rem' }}
+            className={styles.buttonContainer}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
           >
-            <Link
-              href="/tools"
-              style={{
-                borderRadius: '0.375rem',
-                backgroundColor: '#142E54',
-                paddingLeft: '1.5rem',
-                paddingRight: '1.5rem',
-                paddingTop: '0.75rem',
-                paddingBottom: '0.75rem',
-                fontSize: '0.875rem',
-                fontWeight: 600,
-                color: 'white',
-                boxShadow: '0 1px 2px 0 rgba(0, 0, 0, 0.05)',
-                transition: 'background-color 300ms',
-                textDecoration: 'none',
-              }}
-              onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#0e2240'}
-              onMouseOut={(e) => e.currentTarget.style.backgroundColor = '#142E54'}
-            >
+            <Button href="/tools">
               Explore Tools
-            </Link>
-            <Link
-              href="/contact"
-              style={{
-                fontSize: '0.875rem',
-                fontWeight: 600,
-                lineHeight: 1.5,
-                color: '#142E54',
-                transition: 'color 300ms',
-                textDecoration: 'none',
-              }}
-              onMouseOver={(e) => e.currentTarget.style.color = '#0e2240'}
-              onMouseOut={(e) => e.currentTarget.style.color = '#142E54'}
-            >
-              Contact Us <span aria-hidden="true" style={{ marginLeft: '0.25rem' }}>→</span>
-            </Link>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className={styles.buttonIcon} style={{ marginLeft: '0.5rem', width: '1rem', height: '1rem' }}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+              </svg>
+            </Button>
+            <Button href="/contact" variant="outline">
+              Contact Us
+            </Button>
           </motion.div>
         </div>
+
+        {/* Trusted by section */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.5 }}
+          style={{
+            marginTop: '6rem',
+            textAlign: 'center',
+          }}
+        >
+          <p style={{
+            fontSize: '0.875rem',
+            fontWeight: '500',
+            color: darkMode ? '#9CA3AF' : '#6B7280',
+            textTransform: 'uppercase',
+            letterSpacing: '0.05em',
+            marginBottom: '1.5rem'
+          }}>
+            Trusted by professionals worldwide
+          </p>
+          <div style={{
+            display: 'flex',
+            flexWrap: 'wrap',
+            justifyContent: 'center',
+            alignItems: 'center',
+            gap: isMobile ? '1.5rem' : '3rem',
+            opacity: 0.7
+          }}>
+            {/* Company logos would go here - representing with text for now */}
+            {['Acme Inc', 'GlobalTech', 'Innovate Co', 'TechForward', 'Future Ltd'].map((company, index) => (
+              <div key={index} style={{
+                fontSize: isMobile ? '1rem' : '1.25rem',
+                fontWeight: '600',
+                color: darkMode ? '#D1D5DB' : '#4B5563'
+              }}>
+                {company}
+              </div>
+            ))}
+          </div>
+        </motion.div>
       </div>
 
       {/* Features Section */}
@@ -196,21 +229,30 @@ export default function Home() {
         paddingBottom: '5rem',
         paddingLeft: isMobile || isTablet ? '1.5rem' : '2rem',
         paddingRight: isMobile || isTablet ? '1.5rem' : '2rem',
-        background: 'linear-gradient(to bottom, #ffffff, rgba(234, 230, 223, 0.3))',
+        background: darkMode ?
+          'linear-gradient(to bottom, #121212, rgba(31, 41, 55, 0.3))' :
+          'linear-gradient(to bottom, #ffffff, rgba(234, 230, 223, 0.3))',
         borderRadius: '1.5rem',
-        boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)'
+        boxShadow: darkMode ?
+          '0 4px 6px -1px rgba(0, 0, 0, 0.2), 0 2px 4px -1px rgba(0, 0, 0, 0.1)' :
+          '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)'
       }}>
         <div style={{ marginLeft: 'auto', marginRight: 'auto', maxWidth: '42rem', textAlign: 'center', marginBottom: '4rem' }}>
           <h2 style={{
-            fontSize: isMobile || isTablet ? '1.875rem' : '2.25rem',
+            fontSize: isMobile || isTablet ? '1.875rem' : '2.5rem',
             fontWeight: 'bold',
             letterSpacing: '-0.025em',
             lineHeight: 1.2,
-            color: '#1F2937'
+            color: darkMode ? '#F9FAFB' : '#1F2937'
           }}>
             <span style={{ color: '#142E54' }}>Powerful</span> Tools for <span style={{ color: '#142E54' }}>Every</span> Task
           </h2>
-          <p style={{ marginTop: '1.5rem', fontSize: '1.125rem', lineHeight: 1.8, color: '#4B5563' }}>
+          <p style={{
+            marginTop: '1.5rem',
+            fontSize: '1.125rem',
+            lineHeight: 1.8,
+            color: darkMode ? '#D1D5DB' : '#4B5563'
+          }}>
             Our tools are designed to streamline your workflow and save you time.
           </p>
         </div>
@@ -230,17 +272,26 @@ export default function Home() {
           viewport={{ once: true }}
         >
           {features.map((feature) => (
-            <motion.div 
+            <motion.div
               key={feature.name}
               variants={item}
+              whileHover={{
+                y: -10,
+                boxShadow: darkMode ?
+                  '0 10px 25px -5px rgba(0, 0, 0, 0.3), 0 8px 10px -6px rgba(0, 0, 0, 0.2)' :
+                  '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
+              }}
               style={{
                 display: 'flex',
                 flexDirection: 'column',
-                backgroundColor: '#FFFFFF',
+                backgroundColor: darkMode ? 'rgba(31, 41, 55, 0.5)' : '#FFFFFF',
                 padding: '2rem',
                 borderRadius: '1rem',
-                boxShadow: '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)',
-                border: '1px solid #F3F4F6',
+                boxShadow: darkMode ?
+                  '0 4px 6px -1px rgba(0, 0, 0, 0.2), 0 2px 4px -1px rgba(0, 0, 0, 0.1)' :
+                  '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)',
+                border: '1px solid',
+                borderColor: darkMode ? 'rgba(55, 65, 81, 0.5)' : '#F3F4F6',
                 transition: 'all 300ms',
               }}
             >
@@ -251,44 +302,408 @@ export default function Home() {
                 alignItems: 'center',
                 justifyContent: 'center',
                 borderRadius: '0.5rem',
-                backgroundColor: '#EAE6DF',
+                backgroundColor: darkMode ? 'rgba(20, 46, 84, 0.3)' : '#EAE6DF',
                 marginBottom: '1.5rem'
               }}>
                 {feature.icon}
               </div>
-              <h3 style={{ fontSize: '1.25rem', fontWeight: 600, lineHeight: 1.75, color: '#142E54' }}>{feature.name}</h3>
-              <p style={{ marginTop: '0.5rem', flex: 1, fontSize: '1rem', lineHeight: 1.75, color: '#4B5563' }}>{feature.description}</p>
-              <Link
+              <h3 style={{
+                fontSize: '1.25rem',
+                fontWeight: 600,
+                lineHeight: 1.75,
+                color: darkMode ? '#F9FAFB' : '#142E54'
+              }}>
+                {feature.name}
+              </h3>
+              <p style={{
+                marginTop: '0.5rem',
+                flex: 1,
+                fontSize: '1rem',
+                lineHeight: 1.75,
+                color: darkMode ? '#D1D5DB' : '#4B5563'
+              }}>
+                {feature.description}
+              </p>
+              <Button
                 href={`/tools#${feature.name.toLowerCase().replace(/\s+/g, '-')}`}
+                variant="outline"
+                size="sm"
+                style={{ marginTop: '1rem' }}
+              >
+                Try Now
+                <span style={{ display: 'inline-block', marginLeft: '0.5rem' }}>→</span>
+              </Button>
+            </motion.div>
+          ))}
+        </motion.div>
+      </div>
+
+      {/* About Us Section */}
+      <div style={{
+        marginLeft: 'auto',
+        marginRight: 'auto',
+        maxWidth: '80rem',
+        paddingLeft: isMobile || isTablet ? '1.5rem' : '2rem',
+        paddingRight: isMobile || isTablet ? '1.5rem' : '2rem',
+        paddingTop: isMobile ? '6rem' : '8rem',
+        paddingBottom: isMobile ? '6rem' : '8rem'
+      }}>
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: isMobile ? '1fr' : (isTablet ? '1fr' : '1fr 1fr'),
+          gap: '4rem',
+          alignItems: 'center'
+        }}>
+          {/* Image/Visual Side */}
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <div style={{
+              position: 'relative',
+              height: isMobile ? '300px' : '500px',
+              borderRadius: '1rem',
+              overflow: 'hidden',
+              backgroundColor: darkMode ? 'rgba(31, 41, 55, 0.5)' : '#F9FAFB',
+              boxShadow: darkMode ?
+                '0 4px 6px -1px rgba(0, 0, 0, 0.2), 0 2px 4px -1px rgba(0, 0, 0, 0.1)' :
+                '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center'
+            }}>
+              {/* For now, adding a placeholder instead of an image */}
+              <div style={{
+                textAlign: 'center',
+                padding: '2rem'
+              }}>
+                <div style={{
+                  fontSize: '4rem',
+                  marginBottom: '1rem',
+                  color: '#142E54'
+                }}>
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1} stroke="currentColor" style={{ width: '6rem', height: '6rem' }}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M20.25 6.375c0 2.278-3.694 4.125-8.25 4.125S3.75 8.653 3.75 6.375m16.5 0c0-2.278-3.694-4.125-8.25-4.125S3.75 4.097 3.75 6.375m16.5 0v11.25c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125V6.375m16.5 0v3.75m-16.5-3.75v3.75m16.5 0v3.75C20.25 16.153 16.556 18 12 18s-8.25-1.847-8.25-4.125v-3.75m16.5 0c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125" />
+                  </svg>
+                </div>
+                <p style={{
+                  fontSize: '1.25rem',
+                  fontWeight: '600',
+                  color: darkMode ? '#E5E7EB' : '#4B5563'
+                }}>
+                  Building tools that empower professionals
+                </p>
+              </div>
+
+              {/* Decorative elements */}
+              <div style={{
+                position: 'absolute',
+                top: '10%',
+                right: '10%',
+                width: '100px',
+                height: '100px',
+                borderRadius: '50%',
+                background: 'radial-gradient(circle, rgba(20, 46, 84, 0.2) 0%, rgba(255, 255, 255, 0) 70%)',
+                zIndex: 0
+              }} />
+
+              <div style={{
+                position: 'absolute',
+                bottom: '10%',
+                left: '10%',
+                width: '150px',
+                height: '150px',
+                borderRadius: '50%',
+                background: 'radial-gradient(circle, rgba(234, 230, 223, 0.3) 0%, rgba(255, 255, 255, 0) 70%)',
+                zIndex: 0
+              }} />
+            </div>
+          </motion.div>
+
+          {/* Text Content Side */}
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+          >
+            <h2 style={{
+              fontSize: isMobile ? '1.875rem' : '2.5rem',
+              fontWeight: 'bold',
+              letterSpacing: '-0.025em',
+              lineHeight: 1.2,
+              color: darkMode ? '#F9FAFB' : '#1F2937',
+              marginBottom: '1.5rem'
+            }}>
+              About <span style={{ color: '#142E54' }}>Kiaros</span>
+            </h2>
+
+            <p style={{
+              fontSize: '1.125rem',
+              lineHeight: 1.8,
+              color: darkMode ? '#D1D5DB' : '#4B5563',
+              marginBottom: '1.5rem'
+            }}>
+              Kiaros was founded with a simple mission: to create powerful, user-friendly tools that help professionals work more efficiently.
+            </p>
+
+            <p style={{
+              fontSize: '1.125rem',
+              lineHeight: 1.8,
+              color: darkMode ? '#D1D5DB' : '#4B5563',
+              marginBottom: '2rem'
+            }}>
+              Our team of dedicated developers and designers work tirelessly to craft intuitive solutions for everyday challenges. We believe that technology should simplify your workflow, not complicate it.
+            </p>
+
+            <div style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(2, 1fr)',
+              gap: '1.5rem',
+              marginBottom: '2rem'
+            }}>
+              {[
+                { number: '10+', label: 'Professional Tools' },
+                { number: '50K+', label: 'Happy Users' },
+                { number: '100+', label: 'Countries Reached' },
+                { number: '24/7', label: 'Customer Support' }
+              ].map((stat, index) => (
+                <div key={index} style={{
+                  padding: '1rem',
+                  backgroundColor: darkMode ? 'rgba(31, 41, 55, 0.3)' : 'rgba(249, 250, 251, 0.8)',
+                  borderRadius: '0.75rem',
+                  textAlign: 'center',
+                  boxShadow: darkMode ?
+                    '0 1px 2px 0 rgba(0, 0, 0, 0.05)' :
+                    '0 1px 2px 0 rgba(0, 0, 0, 0.05)',
+                  border: '1px solid',
+                  borderColor: darkMode ? 'rgba(55, 65, 81, 0.3)' : '#E5E7EB'
+                }}>
+                  <div style={{
+                    fontSize: '1.5rem',
+                    fontWeight: '700',
+                    color: '#142E54',
+                    marginBottom: '0.5rem'
+                  }}>
+                    {stat.number}
+                  </div>
+                  <div style={{
+                    fontSize: '0.875rem',
+                    color: darkMode ? '#9CA3AF' : '#6B7280'
+                  }}>
+                    {stat.label}
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              style={{ display: 'inline-block' }}
+            >
+              <Link
+                href="/about"
                 style={{
-                  marginTop: '1.5rem',
-                  fontSize: '0.875rem',
-                  fontWeight: 500,
-                  color: '#142E54',
-                  transition: 'color 300ms',
-                  display: 'flex',
-                  alignItems: 'center',
+                  fontSize: '1rem',
+                  fontWeight: 600,
+                  lineHeight: 1.5,
+                  color: darkMode ? '#E5E7EB' : '#142E54',
+                  transition: 'all 300ms',
                   textDecoration: 'none',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '0.5rem',
+                  borderRadius: '2rem',
+                  border: '2px solid #142E54',
+                  paddingLeft: '1.5rem',
+                  paddingRight: '1.5rem',
+                  paddingTop: '0.625rem',
+                  paddingBottom: '0.625rem',
                 }}
                 onMouseOver={(e) => {
-                  e.currentTarget.style.color = '#0e2240';
+                  e.currentTarget.style.backgroundColor = '#142E54';
+                  e.currentTarget.style.color = 'white';
+                }}
+                onMouseOut={(e) => {
+                  e.currentTarget.style.backgroundColor = 'transparent';
+                  e.currentTarget.style.color = darkMode ? '#E5E7EB' : '#142E54';
+                }}
+              >
+                Learn more about us
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" style={{ width: '1rem', height: '1rem' }}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+                </svg>
+              </Link>
+            </motion.div>
+          </motion.div>
+        </div>
+      </div>
+
+      {/* Testimonials Section */}
+      <div style={{
+        marginLeft: 'auto',
+        marginRight: 'auto',
+        maxWidth: '80rem',
+        paddingLeft: isMobile || isTablet ? '1.5rem' : '2rem',
+        paddingRight: isMobile || isTablet ? '1.5rem' : '2rem',
+        paddingTop: isMobile ? '6rem' : '8rem',
+        paddingBottom: isMobile ? '6rem' : '8rem'
+      }}>
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+        >
+          <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
+            <h2 style={{
+              fontSize: isMobile || isTablet ? '1.875rem' : '2.5rem',
+              fontWeight: 'bold',
+              letterSpacing: '-0.025em',
+              lineHeight: 1.2,
+              color: darkMode ? '#F9FAFB' : '#1F2937',
+              marginBottom: '1.5rem'
+            }}>
+              What <span style={{ color: '#142E54' }}>Professionals</span> Say About Us
+            </h2>
+            <p style={{
+              fontSize: '1.125rem',
+              lineHeight: 1.8,
+              color: darkMode ? '#D1D5DB' : '#4B5563',
+              maxWidth: '42rem',
+              margin: '0 auto'
+            }}>
+              Discover why professionals across various industries trust our tools for their daily workflow.
+            </p>
+          </div>
+
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: isMobile ? 'repeat(1, 1fr)' : (isTablet ? 'repeat(2, 1fr)' : 'repeat(3, 1fr)'),
+            gap: '2rem',
+          }}>
+            {[
+              {
+                quote: "Manu is the man! He is the best front-end developer I have worked with. He took the requirements and quite literally ran with them.",
+                author: "John Shahawy",
+                role: "Founder at Moonbeam",
+                rating: 5
+              },
+              {
+                quote: "These tools have saved me countless hours of work. The interface is intuitive and the results are always professional.",
+                author: "Sarah Johnson",
+                role: "Senior Designer, CreativeMinds",
+                rating: 5
+              },
+              {
+                quote: "I've tried many productivity suites, but this one stands out. The attention to detail and user experience is unmatched.",
+                author: "Michael Chen",
+                role: "Project Manager, TechSolutions",
+                rating: 5
+              }
+            ].map((testimonial, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                whileHover={{ y: -8, transition: { duration: 0.2 } }}
+                style={{
+                  backgroundColor: darkMode ? 'rgba(31, 41, 55, 0.5)' : 'white',
+                  borderRadius: '1rem',
+                  padding: '2rem',
+                  boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
+                  border: '1px solid',
+                  borderColor: darkMode ? 'rgba(55, 65, 81, 0.5)' : '#F3F4F6',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  height: '100%'
+                }}
+              >
+                <div style={{ display: 'flex', gap: '0.25rem', marginBottom: '1.5rem' }}>
+                  {[...Array(testimonial.rating)].map((_, i) => (
+                    <svg key={i} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#FCD34D" style={{ width: '1.25rem', height: '1.25rem' }}>
+                      <path fillRule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" clipRule="evenodd" />
+                    </svg>
+                  ))}
+                </div>
+                <p style={{
+                  fontSize: '1.125rem',
+                  lineHeight: 1.75,
+                  fontStyle: 'italic',
+                  color: darkMode ? '#E5E7EB' : '#4B5563',
+                  flex: 1
+                }}>
+                  "{testimonial.quote}"
+                </p>
+                <div style={{ marginTop: '2rem' }}>
+                  <p style={{
+                    fontSize: '1rem',
+                    fontWeight: '600',
+                    color: darkMode ? '#F9FAFB' : '#1F2937',
+                    marginBottom: '0.25rem'
+                  }}>
+                    {testimonial.author}
+                  </p>
+                  <p style={{
+                    fontSize: '0.875rem',
+                    color: darkMode ? '#9CA3AF' : '#6B7280'
+                  }}>
+                    {testimonial.role}
+                  </p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+
+          <div style={{
+            marginTop: '4rem',
+            textAlign: 'center'
+          }}>
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              style={{ display: 'inline-block' }}
+            >
+              <Link
+                href="/about"
+                style={{
+                  fontSize: '1rem',
+                  fontWeight: 600,
+                  color: darkMode ? '#E5E7EB' : '#142E54',
+                  transition: 'all 300ms',
+                  textDecoration: 'none',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '0.5rem'
+                }}
+                onMouseOver={(e) => {
+                  e.currentTarget.style.color = darkMode ? '#FFFFFF' : '#0e2240';
                   const arrow = e.currentTarget.querySelector('span');
                   if (arrow) {
                     arrow.style.transform = 'translateX(4px)';
                   }
                 }}
                 onMouseOut={(e) => {
-                  e.currentTarget.style.color = '#142E54';
+                  e.currentTarget.style.color = darkMode ? '#E5E7EB' : '#142E54';
                   const arrow = e.currentTarget.querySelector('span');
                   if (arrow) {
                     arrow.style.transform = 'translateX(0)';
                   }
                 }}
               >
-                Try Now <span style={{ display: 'inline-block', marginLeft: '0.25rem', transition: 'transform 300ms' }}>→</span>
+                Read more testimonials
+                <span style={{
+                  display: 'inline-block',
+                  transition: 'transform 300ms'
+                }}>→</span>
               </Link>
             </motion.div>
-          ))}
+          </div>
         </motion.div>
       </div>
 
@@ -307,7 +722,7 @@ export default function Home() {
             position: 'relative',
             isolation: 'isolate',
             overflow: 'hidden',
-            backgroundColor: '#142E54',
+            backgroundColor: darkMode ? '#1E3A8A' : '#142E54',
             paddingLeft: isMobile ? '1.5rem' : (isTablet ? '4rem' : '6rem'),
             paddingRight: isMobile ? '1.5rem' : (isTablet ? '4rem' : '6rem'),
             paddingTop: isMobile ? '4rem' : '6rem',
@@ -328,7 +743,7 @@ export default function Home() {
             width: '8rem',
             height: '8rem',
             borderRadius: '9999px',
-            background: 'radial-gradient(#A7967E, transparent)',
+            background: darkMode ? 'radial-gradient(#4F46E5, transparent)' : 'radial-gradient(#A7967E, transparent)',
             opacity: 0.3,
           }} aria-hidden="true" />
 
@@ -339,13 +754,13 @@ export default function Home() {
             width: '12rem',
             height: '12rem',
             borderRadius: '9999px',
-            background: 'radial-gradient(#C2CCC5, transparent)',
+            background: darkMode ? 'radial-gradient(#6366F1, transparent)' : 'radial-gradient(#C2CCC5, transparent)',
             opacity: 0.2,
           }} aria-hidden="true" />
 
           <div style={{ marginLeft: 'auto', marginRight: 'auto', maxWidth: '42rem', textAlign: 'center', position: 'relative', zIndex: 1 }}>
             <h2 style={{
-              fontSize: isMobile || isTablet ? '1.875rem' : '2.25rem',
+              fontSize: isMobile || isTablet ? '1.875rem' : '2.5rem',
               fontWeight: 'bold',
               letterSpacing: '-0.025em',
               lineHeight: 1.2,
@@ -364,63 +779,77 @@ export default function Home() {
             }}>
               Get started today with our premium tools designed for professionals like you.
             </p>
-            <div style={{ marginTop: '2.5rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '1.5rem' }}>
-              <Link
-                href="/payment"
-                style={{
-                  borderRadius: '0.375rem',
-                  backgroundColor: 'white',
-                  paddingLeft: '1.5rem',
-                  paddingRight: '1.5rem',
-                  paddingTop: '0.75rem',
-                  paddingBottom: '0.75rem',
-                  fontSize: '0.875rem',
-                  fontWeight: 600,
-                  color: '#142E54',
-                  boxShadow: '0 1px 2px 0 rgba(0, 0, 0, 0.05)',
-                  transition: 'all 300ms',
-                  textDecoration: 'none',
-                }}
-                onMouseOver={(e) => {
-                  e.currentTarget.style.backgroundColor = '#EAE6DF';
-                  e.currentTarget.style.transform = 'translateY(-2px)';
-                }}
-                onMouseOut={(e) => {
-                  e.currentTarget.style.backgroundColor = 'white';
-                  e.currentTarget.style.transform = 'translateY(0)';
-                }}
+            <div style={{ marginTop: '2.5rem', display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'center', gap: '1.5rem' }}>
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
               >
-                Get Premium Access
-              </Link>
-              <Link
-                href="/tools"
-                style={{
-                  fontSize: '0.875rem',
-                  fontWeight: 600,
-                  lineHeight: 1.5,
-                  color: 'white',
-                  transition: 'color 300ms',
-                  display: 'flex',
-                  alignItems: 'center',
-                  textDecoration: 'none',
-                }}
-                onMouseOver={(e) => {
-                  e.currentTarget.style.color = '#C2CCC5';
-                  const arrow = e.currentTarget.querySelector('span');
-                  if (arrow) {
-                    arrow.style.transform = 'translateX(4px)';
-                  }
-                }}
-                onMouseOut={(e) => {
-                  e.currentTarget.style.color = 'white';
-                  const arrow = e.currentTarget.querySelector('span');
-                  if (arrow) {
-                    arrow.style.transform = 'translateX(0)';
-                  }
-                }}
+                <Link
+                  href="/payment"
+                  style={{
+                    borderRadius: '3rem',
+                    backgroundColor: 'white',
+                    paddingLeft: '2rem',
+                    paddingRight: '2rem',
+                    paddingTop: '0.875rem',
+                    paddingBottom: '0.875rem',
+                    fontSize: '1rem',
+                    fontWeight: 600,
+                    color: darkMode ? '#1E3A8A' : '#142E54',
+                    boxShadow: '0 4px 10px rgba(0, 0, 0, 0.1)',
+                    transition: 'all 300ms',
+                    textDecoration: 'none',
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                  }}
+                  onMouseOver={(e) => {
+                    e.currentTarget.style.backgroundColor = darkMode ? '#F3F4F6' : '#EAE6DF';
+                    e.currentTarget.style.transform = 'translateY(-2px)';
+                    e.currentTarget.style.boxShadow = '0 6px 15px rgba(0, 0, 0, 0.15)';
+                  }}
+                  onMouseOut={(e) => {
+                    e.currentTarget.style.backgroundColor = 'white';
+                    e.currentTarget.style.transform = 'translateY(0)';
+                    e.currentTarget.style.boxShadow = '0 4px 10px rgba(0, 0, 0, 0.1)';
+                  }}
+                >
+                  Get Premium Access
+                </Link>
+              </motion.div>
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
               >
-                Explore Free Tools <span aria-hidden="true" style={{ display: 'inline-block', marginLeft: '0.25rem', transition: 'transform 300ms' }}>→</span>
-              </Link>
+                <Link
+                  href="/tools"
+                  style={{
+                    fontSize: '1rem',
+                    fontWeight: 600,
+                    lineHeight: 1.5,
+                    color: 'white',
+                    transition: 'all 300ms',
+                    display: 'flex',
+                    alignItems: 'center',
+                    textDecoration: 'none',
+                    borderRadius: '3rem',
+                    border: '2px solid white',
+                    paddingLeft: '2rem',
+                    paddingRight: '2rem',
+                    paddingTop: '0.75rem',
+                    paddingBottom: '0.75rem',
+                  }}
+                  onMouseOver={(e) => {
+                    e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
+                    e.currentTarget.style.transform = 'translateY(-2px)';
+                  }}
+                  onMouseOut={(e) => {
+                    e.currentTarget.style.backgroundColor = 'transparent';
+                    e.currentTarget.style.transform = 'translateY(0)';
+                  }}
+                >
+                  Explore Free Tools <span aria-hidden="true" style={{ display: 'inline-block', marginLeft: '0.5rem', transition: 'transform 300ms' }}>→</span>
+                </Link>
+              </motion.div>
             </div>
           </div>
         </motion.div>

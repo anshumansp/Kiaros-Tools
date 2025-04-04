@@ -4,17 +4,17 @@ const options = {
   definition: {
     openapi: '3.0.0',
     info: {
-      title: 'ToolsZone API',
+      title: 'kiaros API',
       version: '1.0.0',
-      description: 'API documentation for ToolsZone application',
+      description: 'API documentation for kiaros application',
       license: {
         name: 'MIT',
         url: 'https://opensource.org/licenses/MIT',
       },
       contact: {
-        name: 'ToolsZone Support',
-        url: 'https://toolszone.com',
-        email: 'support@toolszone.com',
+        name: 'kiaros Support',
+        url: 'https://kiaros.com',
+        email: 'support@kiaros.com',
       },
     },
     servers: [
@@ -23,7 +23,7 @@ const options = {
         description: 'Development server',
       },
       {
-        url: 'https://api.toolszone.com',
+        url: 'https://api.kiaros.com',
         description: 'Production server',
       },
     ],

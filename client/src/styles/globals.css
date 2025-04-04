@@ -3,6 +3,16 @@
 @tailwind utilities;
 
 :root {
+  --primary-color: #142E54;
+  --primary-color-rgb: 20, 46, 84;
+  --primary-hover: #0e2240;
+  --text-color: #000000;
+  --text-secondary: #4B5563;
+  --background-color: #FFFFFF;
+  --background-secondary: #F9FAFB;
+  --border-color: #E5E7EB;
+  --shadow-color: rgba(0, 0, 0, 0.1);
+  --shadow-hover: rgba(0, 0, 0, 0.15);
   --primary-blue: #142E54;
   --secondary-sand: #A7967E;
   --secondary-sage: #C2CCC5;
@@ -10,7 +20,17 @@
   --cursor-color: #000000;
 }
 
-.dark {
+[data-theme="dark"] {
+  --primary-color: #142E54;
+  --primary-color-rgb: 20, 46, 84;
+  --primary-hover: #1f3f6d;
+  --text-color: #F9FAFB;
+  --text-secondary: #D1D5DB;
+  --background-color: #121212;
+  --background-secondary: #1F2937;
+  --border-color: rgba(55, 65, 81, 0.5);
+  --shadow-color: rgba(0, 0, 0, 0.2);
+  --shadow-hover: rgba(0, 0, 0, 0.3);
   --primary-blue: #1e3a61;
   --secondary-sand: #b8a88f;
   --secondary-sage: #d3dbd6;
@@ -19,18 +39,22 @@
 
 html {
   scroll-behavior: smooth;
+  max-width: 100vw;
+  overflow-x: hidden;
 }
 
 body {
-  background-color: #FFFFFF;
-  color: #000000;
+  background-color: var(--background-color);
+  color: var(--text-color);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  max-width: 100vw;
+  overflow-x: hidden;
 }
 
 body.dark {
-  background-color: #1a1a1a;
-  color: #FFFFFF;
+  background-color: var(--background-color);
+  color: var(--text-color);
 }
 
 h1, h2, h3, h4, h5 {
@@ -73,4 +97,31 @@ body {
 
 .bg-gradient-secondary {
   background: linear-gradient(to bottom right, #142E54, #000000);
+}
+
+/* Spinner animation */
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+@media (prefers-color-scheme: dark) {
+  html {
+    color-scheme: dark;
+  }
 } 

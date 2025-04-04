@@ -54,15 +54,6 @@ const config: Config = {
           '100%': { opacity: '1', transform: 'translateY(0)' },
         },
       },
-      backgroundColor: theme => ({
-        ...theme('colors'),
-      }),
-      textColor: theme => ({
-        ...theme('colors'),
-      }),
-      borderColor: theme => ({
-        ...theme('colors'),
-      }),
     },
   },
   plugins: [],

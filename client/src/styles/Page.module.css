@@ -1,0 +1,80 @@
+.exploreButton {
+  border-radius: 3rem;
+  background-color: #142E54;
+  padding: 0.875rem 2rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: white;
+  box-shadow: 0 4px 10px rgba(20, 46, 84, 0.3);
+  transition: all 300ms;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  cursor: pointer;
+  min-width: 160px;
+}
+
+.exploreButton:hover {
+  background-color: #1a3967;
+  box-shadow: 0 6px 15px rgba(20, 46, 84, 0.4);
+  transform: translateY(-2px);
+}
+
+.exploreButton:active {
+  transform: translateY(0);
+}
+
+.contactButton {
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 3rem;
+  padding: 0.75rem 2rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 300ms;
+  background-color: transparent;
+  color: #142E54;
+  border: 2px solid #142E54;
+  text-decoration: none;
+  cursor: pointer;
+  min-width: 160px;
+}
+
+/* Handle dark mode via data-theme attribute */
+[data-theme="dark"] .contactButton {
+  color: #E5E7EB;
+  border-color: #E5E7EB;
+}
+
+.contactButton:hover {
+  background-color: #142E54;
+  color: white !important;
+  transform: translateY(-2px);
+}
+
+[data-theme="dark"] .contactButton:hover {
+  background-color: #E5E7EB;
+  color: #1a1a1a !important;
+  border-color: #E5E7EB;
+}
+
+.contactButton:active {
+  transform: translateY(0);
+}
+
+.buttonIcon {
+  width: 1rem;
+  height: 1rem;
+  margin-left: 0.5rem;
+}
+
+.buttonContainer {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  align-items: center;
+  margin-top: 3rem;
+} 

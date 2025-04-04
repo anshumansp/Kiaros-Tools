@@ -1,15 +1,34 @@
 'use client';
 
-import { useState } from 'react';
 import Link from 'next/link';
+import { motion } from 'framer-motion';
 
 const navigation = {
     main: [
         { name: 'Home', href: '/' },
         { name: 'Tools', href: '/tools' },
         { name: 'Contact', href: '/contact' },
+        { name: 'About', href: '/about' },
         { name: 'Privacy', href: '/privacy' },
         { name: 'Terms', href: '/terms' },
+    ],
+    features: [
+        { name: 'PDF Tools', href: '/tools/pdf' },
+        { name: 'Image Converter', href: '/tools/images' },
+        { name: 'Text Tools', href: '/tools/text' },
+        { name: 'Calculator', href: '/tools/calculator' },
+        { name: 'File Tools', href: '/tools/files' },
+    ],
+    company: [
+        { name: 'About Us', href: '/about' },
+        { name: 'Careers', href: '/careers' },
+        { name: 'Blog', href: '/blog' },
+        { name: 'Support', href: '/support' },
+    ],
+    legal: [
+        { name: 'Privacy Policy', href: '/privacy' },
+        { name: 'Terms of Service', href: '/terms' },
+        { name: 'Cookie Policy', href: '/cookies' },
     ],
     social: [
         {
@@ -34,73 +53,109 @@ const navigation = {
                 </svg>
             ),
         },
+        {
+            name: 'LinkedIn',
+            href: '#',
+            icon: (props: React.SVGProps<SVGSVGElement>) => (
+                <svg fill="currentColor" viewBox="0 0 24 24" {...props}>
+                    <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+                </svg>
+            ),
+        },
+        {
+            name: 'YouTube',
+            href: '#',
+            icon: (props: React.SVGProps<SVGSVGElement>) => (
+                <svg fill="currentColor" viewBox="0 0 24 24" {...props}>
+                    <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+                </svg>
+            ),
+        },
     ],
 };
 
 export default function Footer() {
-    const [darkMode, setDarkMode] = useState(false);
-
-    const toggleTheme = () => {
-        setDarkMode(!darkMode);
-        // In a real implementation, you'd update the theme in a context or store
-        document.documentElement.classList.toggle('dark');
-    };
-
     return (
         <footer style={{
-            backgroundColor: 'white',
-            borderTop: '1px solid #f3f4f6'
+            backgroundColor: 'var(--background-secondary)',
+            borderTop: '1px solid var(--border-color)',
+            position: 'relative',
+            overflow: 'hidden',
         }}>
+            {/* Background decoration */}
+            <div style={{
+                position: 'absolute',
+                top: '5%',
+                right: '5%',
+                width: '300px',
+                height: '300px',
+                borderRadius: '50%',
+                background: 'radial-gradient(circle, var(--tertiary-cream) 0%, rgba(255, 255, 255, 0) 70%)',
+                zIndex: 0
+            }} />
+
+            <div style={{
+                position: 'absolute',
+                bottom: '10%',
+                left: '5%',
+                width: '200px',
+                height: '200px',
+                borderRadius: '50%',
+                background: 'radial-gradient(circle, var(--primary-color) 0%, rgba(255, 255, 255, 0) 70%)',
+                zIndex: 0
+            }} />
+
             <div style={{
                 maxWidth: '80rem',
                 marginLeft: 'auto',
                 marginRight: 'auto',
-                overflow: 'hidden',
-                padding: '4rem 1.5rem',
+                paddingTop: '5rem',
+                paddingBottom: '2rem',
+                paddingLeft: '1.5rem',
+                paddingRight: '1.5rem',
+                position: 'relative',
+                zIndex: 1
             }}>
-                <nav style={{
-                    display: 'flex',
-                    flexWrap: 'wrap',
-                    justifyContent: 'center',
-                }} aria-label="Footer">
-                    {navigation.main.map((item) => (
-                        <Link
-                            key={item.name}
-                            href={item.href}
-                            style={{
-                                fontSize: '0.875rem',
-                                lineHeight: 1.5,
-                                color: '#4B5563',
-                                marginLeft: '1rem',
-                                marginRight: '1rem',
-                                marginBottom: '1rem',
-                                textDecoration: 'none',
-                                transition: 'color 150ms',
-                            }}
-                            onMouseOver={(e) => e.currentTarget.style.color = '#142E54'}
-                            onMouseOut={(e) => e.currentTarget.style.color = '#4B5563'}
-                        >
-                            {item.name}
-                        </Link>
-                    ))}
-                </nav>
-
                 <div style={{
-                    marginTop: '2rem',
+                    display: 'grid',
+                    gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+                    gap: '3rem',
+                    marginBottom: '4rem'
+                }}>
+                    {/* Logo and About */}
+                    <div>
+                        <Link href="/" style={{ display: 'inline-flex', textDecoration: 'none' }}>
+                            <span style={{ fontSize: '1.75rem', fontWeight: 'bold', color: 'var(--text-color)', letterSpacing: '-0.05em' }}>
+                                Kia<span style={{ color: 'var(--primary-color)' }}>ros</span>
+                            </span>
+                        </Link>
+                        <p style={{
+                            marginTop: '1.5rem',
+                            fontSize: '0.875rem',
+                            lineHeight: 1.5, 
+                            color: 'var(--text-secondary)',
+                            maxWidth: '20rem'
+                        }}>
+                            Premium tools designed to streamline your workflow and boost productivity.
+                            Simple, efficient, and ready when you need them.
+                        </p>
+                <div style={{
+                            marginTop: '1.5rem',
                     display: 'flex',
-                    justifyContent: 'center',
-                    gap: '2.5rem'
+                            gap: '1rem'
                 }}>
                     {navigation.social.map((item) => (
-                        <Link
+                        <motion.a
                             key={item.name}
                             href={item.href}
+                            whileHover={{ scale: 1.1 }}
+                            whileTap={{ scale: 0.95 }}
                             style={{
-                                color: '#9CA3AF',
+                                color: 'var(--text-secondary)',
                                 transition: 'color 150ms',
                             }}
-                            onMouseOver={(e) => e.currentTarget.style.color = '#6B7280'}
-                            onMouseOut={(e) => e.currentTarget.style.color = '#9CA3AF'}
+                            onMouseOver={(e) => e.currentTarget.style.color = 'var(--primary-color)'}
+                            onMouseOut={(e) => e.currentTarget.style.color = 'var(--text-secondary)'}
                         >
                             <span style={{
                                 position: 'absolute',
@@ -115,64 +170,227 @@ export default function Footer() {
                             }}>
                                 {item.name}
                             </span>
-                            <item.icon style={{ height: '1.5rem', width: '1.5rem' }} aria-hidden="true" />
-                        </Link>
+                            <item.icon style={{ height: '1.25rem', width: '1.25rem' }} aria-hidden="true" />
+                        </motion.a>
                     ))}
-                </div>
+                        </div>
+                    </div>
 
-                <div style={{
-                    marginTop: '2rem',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center'
-                }}>
-                    <button
-                        type="button"
-                        onClick={toggleTheme}
-                        style={{
-                            borderRadius: '9999px',
-                            padding: '0.375rem',
-                            color: '#6B7280',
-                            backgroundColor: 'transparent',
+                    {/* Tools Links */}
+                    <div>
+                        <h3 style={{
+                            fontSize: '1rem',
+                            fontWeight: '600',
+                            color: 'var(--text-color)',
+                            marginBottom: '1.25rem'
+                        }}>
+                            Popular Tools
+                        </h3>
+                        <ul style={{ padding: 0, margin: 0, listStyle: 'none' }}>
+                            {navigation.features.map((item) => (
+                                <li key={item.name} style={{ marginBottom: '0.75rem' }}>
+                                    <motion.div
+                                        whileHover={{ x: 5 }}
+                                        transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                                    >
+                                        <Link
+                                            href={item.href}
+                                            style={{
+                                                fontSize: '0.875rem',
+                                                color: 'var(--text-secondary)',
+                                                textDecoration: 'none',
+                                                transition: 'color 150ms',
+                                            }}
+                                            onMouseOver={(e) => e.currentTarget.style.color = 'var(--primary-color)'}
+                                            onMouseOut={(e) => e.currentTarget.style.color = 'var(--text-secondary)'}
+                                        >
+                                            {item.name}
+                                        </Link>
+                                    </motion.div>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+
+                    {/* Company Links */}
+                    <div>
+                        <h3 style={{
+                            fontSize: '1rem',
+                            fontWeight: '600',
+                            color: 'var(--text-color)',
+                            marginBottom: '1.25rem'
+                        }}>
+                            Company
+                        </h3>
+                        <ul style={{ padding: 0, margin: 0, listStyle: 'none' }}>
+                            {navigation.company.map((item) => (
+                                <li key={item.name} style={{ marginBottom: '0.75rem' }}>
+                                    <motion.div
+                                        whileHover={{ x: 5 }}
+                                        transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                                    >
+                                        <Link
+                                            href={item.href}
+                                            style={{
+                                                fontSize: '0.875rem',
+                                                color: 'var(--text-secondary)',
+                                                textDecoration: 'none',
+                                                transition: 'color 150ms',
+                                            }}
+                                            onMouseOver={(e) => e.currentTarget.style.color = 'var(--primary-color)'}
+                                            onMouseOut={(e) => e.currentTarget.style.color = 'var(--text-secondary)'}
+                                        >
+                                            {item.name}
+                                        </Link>
+                                    </motion.div>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+
+                    {/* Legal Links */}
+                    <div>
+                        <h3 style={{
+                            fontSize: '1rem',
+                            fontWeight: '600',
+                            color: 'var(--text-color)',
+                            marginBottom: '1.25rem'
+                        }}>
+                            Legal
+                        </h3>
+                        <ul style={{ padding: 0, margin: 0, listStyle: 'none' }}>
+                            {navigation.legal.map((item) => (
+                                <li key={item.name} style={{ marginBottom: '0.75rem' }}>
+                                    <motion.div
+                                        whileHover={{ x: 5 }}
+                                        transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                                    >
+                                        <Link
+                                            href={item.href}
+                                            style={{
+                                                fontSize: '0.875rem',
+                                                color: 'var(--text-secondary)',
+                                                textDecoration: 'none',
+                                                transition: 'color 150ms',
+                                            }}
+                                            onMouseOver={(e) => e.currentTarget.style.color = 'var(--primary-color)'}
+                                            onMouseOut={(e) => e.currentTarget.style.color = 'var(--text-secondary)'}
+                                        >
+                                            {item.name}
+                                        </Link>
+                                    </motion.div>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+
+                    {/* Newsletter Signup */}
+                    <div>
+                        <h3 style={{
+                            fontSize: '1rem',
+                            fontWeight: '600',
+                            color: 'var(--text-color)',
+                            marginBottom: '1.25rem'
+                        }}>
+                            Stay updated
+                        </h3>
+                        <p style={{
+                            fontSize: '0.875rem',
+                            lineHeight: 1.5,
+                            color: 'var(--text-secondary)',
+                            marginBottom: '1rem'
+                        }}>
+                            Get notifications about new tools and features
+                        </p>
+                        <form style={{ display: 'flex', gap: '0.5rem' }}>
+                            <div style={{ flex: 1 }}>
+                                <label htmlFor="email-address" style={{ position: 'absolute', width: '1px', height: '1px', padding: '0', margin: '-1px', overflow: 'hidden', clip: 'rect(0, 0, 0, 0)', whiteSpace: 'nowrap', borderWidth: '0' }}>
+                                    Email address
+                                </label>
+                                <input
+                                    id="email-address"
+                                    name="email"
+                                    type="email"
+                                    autoComplete="email"
+                                    required
+                                    placeholder="Your email"
+                                    style={{
+                                        width: '100%',
+                                        borderRadius: '0.375rem',
+                                        border: '1px solid var(--border-color)',
+                                        padding: '0.5rem 0.75rem',
+                                        fontSize: '0.875rem',
+                                        backgroundColor: 'var(--background-color)',
+                                        color: 'var(--text-color)',
+                                        boxShadow: '0 1px 2px 0 var(--shadow-color)',
+                                    }}
+                                />
+                            </div>
+                            <motion.button
+                                whileHover={{ scale: 1.05 }}
+                                whileTap={{ scale: 0.95 }}
+                                type="submit"
+                                style={{
+                                    borderRadius: '0.375rem',
+                                    backgroundColor: 'var(--primary-color)',
+                                    padding: '0.5rem 1rem',
+                                    fontSize: '0.875rem',
+                                    fontWeight: '500',
+                                    color: 'white',
                             border: 'none',
                             cursor: 'pointer',
                             transition: 'background-color 150ms',
                         }}
-                        onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#F3F4F6'}
-                        onMouseOut={(e) => e.currentTarget.style.backgroundColor = 'transparent'}
-                    >
-                        <span style={{
-                            position: 'absolute',
-                            width: '1px',
-                            height: '1px',
-                            padding: '0',
-                            margin: '-1px',
-                            overflow: 'hidden',
-                            clip: 'rect(0, 0, 0, 0)',
-                            whiteSpace: 'nowrap',
-                            borderWidth: '0'
-                        }}>Toggle dark mode</span>
-                        {darkMode ? (
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" style={{ width: '1.25rem', height: '1.25rem' }}>
-                                <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591-1.591M12 18.75V21m-4.773-4.227-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z" />
-                            </svg>
-                        ) : (
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" style={{ width: '1.25rem', height: '1.25rem' }}>
-                                <path strokeLinecap="round" strokeLinejoin="round" d="M21.752 15.002A9.72 9.72 0 0 1 18 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 0 0 3 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 0 0 9.002-5.998Z" />
-                            </svg>
-                        )}
-                    </button>
+                                onMouseOver={(e) => e.currentTarget.style.backgroundColor = 'var(--primary-hover)'}
+                                onMouseOut={(e) => e.currentTarget.style.backgroundColor = 'var(--primary-color)'}
+                            >
+                                Subscribe
+                            </motion.button>
+                        </form>
+                    </div>
                 </div>
 
+                <div style={{
+                    borderTop: '1px solid var(--border-color)',
+                    paddingTop: '2rem',
+                    display: 'flex',
+                    flexWrap: 'wrap',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    gap: '1rem'
+                }}>
                 <p style={{
-                    marginTop: '2rem',
-                    textAlign: 'center',
-                    fontSize: '0.75rem',
+                        fontSize: '0.875rem',
                     lineHeight: 1.25,
-                    color: '#6B7280'
+                        color: 'var(--text-secondary)'
                 }}>
                     &copy; {new Date().getFullYear()} Kiaros. All rights reserved.
                 </p>
+
+                    <nav style={{
+                        display: 'flex',
+                        flexWrap: 'wrap',
+                        gap: '1.5rem',
+                    }} aria-label="Footer">
+                        {navigation.main.map((item) => (
+                            <Link
+                                key={item.name}
+                                href={item.href}
+                                style={{
+                                    fontSize: '0.875rem',
+                                    lineHeight: 1.5,
+                                    color: 'var(--text-secondary)',
+                                    textDecoration: 'none',
+                                    transition: 'color 150ms',
+                                }}
+                                onMouseOver={(e) => e.currentTarget.style.color = 'var(--primary-color)'}
+                                onMouseOut={(e) => e.currentTarget.style.color = 'var(--text-secondary)'}
+                            >
+                                {item.name}
+                            </Link>
+                        ))}
+                    </nav>
+                </div>
             </div>
         </footer>
     );

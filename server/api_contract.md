@@ -1,6 +1,6 @@
-# ToolsZone API Documentation
+# kiaros API Documentation
 
-This document outlines the API contracts for the ToolsZone backend services. It provides comprehensive details about endpoints, request formats, response structures, and authentication requirements.
+This document outlines the API contracts for the kiaros backend services. It provides comprehensive details about endpoints, request formats, response structures, and authentication requirements.
 
 ## Base URL
 
